@@ -1,3 +1,5 @@
+
+#This is makefile
 .PHONY: clean 
 testStack: testStack.o stack.o
 	gcc -g -Wall stack.o testStack.o -o testStack
