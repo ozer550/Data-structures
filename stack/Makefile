@@ -1,4 +1,4 @@
-.PHONY: clean1 clean2
+.PHONY: clean 
 testStack: testStack.o stack.o
 	gcc -g -Wall stack.o testStack.o -o testStack
 
