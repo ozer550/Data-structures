@@ -125,7 +125,7 @@ void Ldelete(List list, int val)
 	{
 		if (list->head->value == val)
 		{
-
+			free(list->head);
 			list->head = NULL;
 			list->size--;
 			return;
@@ -138,7 +138,9 @@ void Ldelete(List list, int val)
 	}
 	else if (list->head->value == val)
 	{
+		Node temp = list->head;
 		list->head = list->head->next;
+		free(temp);
 		list->size--;
 		return;
 	}
@@ -160,12 +162,16 @@ void Ldelete(List list, int val)
 
 		if (curr->next == NULL)
 		{
+			Node temp = bfcurr->next;
 			bfcurr->next = NULL;
+			free(temp);
 			list->size--;
 			return;
 		}
+		Node temp = bfcurr->next;
 		bfcurr->next = curr->next;
 		list->size--;
+		free(temp);
 		return;
 	}
 }
@@ -189,6 +195,7 @@ void Lfree(List list)
 			curr = curr->next;
 			free(bfcurr);
 		}
+
 		free(list);
 	}
 }
