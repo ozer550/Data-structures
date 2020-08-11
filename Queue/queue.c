@@ -34,7 +34,7 @@ struct queue
 };
 
 //function to create a new node with item value
-//fxn is provate to this ADT
+//fxn is private to this ADT
 static Node *newNode(int val)
 {
 	Node *new = malloc(sizeof *new);
