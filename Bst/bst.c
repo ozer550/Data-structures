@@ -18,8 +18,6 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef struct node *Node;
-
 struct bst
 {
 	Node head;
@@ -89,17 +87,6 @@ static void insert_node(Node node, Node head)
 	Node curr = head;
 	if (curr->value > node->value)
 	{
-		if (curr->right == NULL)
-		{
-			curr->right = node;
-		}
-		else
-		{
-			insert_node(node, curr->right);
-		}
-	}
-	else
-	{
 		if (curr->left == NULL)
 		{
 			curr->left = node;
@@ -107,6 +94,17 @@ static void insert_node(Node node, Node head)
 		else
 		{
 			insert_node(node, curr->left);
+		}
+	}
+	else
+	{
+		if (curr->right == NULL)
+		{
+			curr->right = node;
+		}
+		else
+		{
+			insert_node(node, curr->right);
 		}
 	}
 }
@@ -127,4 +125,49 @@ void Binsert(Bst tree, int val)
 		insert_node(new, tree->head);
 		tree->size++;
 	}
+}
+
+static Node dfs(Node head, int val)
+{
+
+	Node otptr = NULL;
+	if (head->value == val)
+	{
+		printf("%d\n", head->value);
+		otptr = head;
+		return otptr;
+	}
+	if (head->left != NULL)
+	{
+		if (val <= head->value)
+		{
+			otptr = dfs(head->left, val);
+			if (otptr != NULL)
+			{
+				return otptr;
+			}
+		}
+	}
+	if (head->right != NULL)
+	{
+		if (val > head->value)
+		{
+			otptr = dfs(head->right, val);
+			if (otptr != NULL)
+			{
+				return otptr;
+			}
+		}
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+//Depth-first-search for bst
+Node Bdfs(Bst tree, int val)
+{
+	assert(tree != NULL);
+	dfs(tree->head, val);
 }

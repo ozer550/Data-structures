@@ -11,6 +11,7 @@
 #define BST_H
 
 typedef struct bst *Bst;
+typedef struct node *Node;
 
 //Creates a tree
 Bst Bmaketree();
@@ -29,5 +30,8 @@ void Bfree(Bst tree);
 
 //Returns true if empty else false
 int BisEmpty(Bst tree);
+
+//Depth-first-search for bst
+Node Bdfs(Bst tree, int val);
 
 #endif
