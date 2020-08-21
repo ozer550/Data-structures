@@ -14,11 +14,16 @@
 #include <assert.h>
 
 #include "bst.h"
+#include "queue.h"
 
 int main()
 {
-	testinsert();
-	testdfs();
+	//testinsert();
+	//testdfs();
+	//testBpreOrder();
+	//testBpostOrder();
+	//testBinOrder();
+	testBlevelorder();
 	printf("All test passed\n");
 	return 0;
 }
@@ -57,5 +62,75 @@ void testdfs()
 	assert(Bdfs(sample, 14) != NULL);
 	assert(Bdfs(sample, 100) == NULL);
 
+	printf("test passed\n");
+}
+
+void testBsum()
+{
+	printf("testing dfsSumfxn function\n");
+	Bst sample = Bmaketree();
+	Binsert(sample, 8);
+	Binsert(sample, 3);
+	Binsert(sample, 10);
+	Binsert(sample, 1);
+	Binsert(sample, 6);
+	Binsert(sample, 14);
+	assert(Bsum(sample) == 33);
+	printf("test passed\n");
+}
+
+void testBpreOrder()
+{
+	printf("testing Bpreorder function\n");
+	Bst sample = Bmaketree();
+	Binsert(sample, 8);
+	Binsert(sample, 3);
+	Binsert(sample, 10);
+	Binsert(sample, 1);
+	Binsert(sample, 6);
+	Binsert(sample, 14);
+	Btraverse(sample, 'p');
+	printf("test passed\n");
+}
+
+void testBpostOrder()
+{
+	printf("testing Bpreorder function\n");
+	Bst sample = Bmaketree();
+	Binsert(sample, 8);
+	Binsert(sample, 3);
+	Binsert(sample, 10);
+	Binsert(sample, 1);
+	Binsert(sample, 6);
+	Binsert(sample, 14);
+	Btraverse(sample, 'P');
+	printf("test passed\n");
+}
+
+void testBinOrder()
+{
+	printf("testing Bpreorder function\n");
+	Bst sample = Bmaketree();
+	Binsert(sample, 8);
+	Binsert(sample, 3);
+	Binsert(sample, 10);
+	Binsert(sample, 1);
+	Binsert(sample, 6);
+	Binsert(sample, 14);
+	Btraverse(sample, 'i');
+	printf("test passed\n");
+}
+
+void testBlevelorder()
+{
+	printf("testing levelorderfxn function\n");
+	Bst sample = Bmaketree();
+	Binsert(sample, 8);
+	Binsert(sample, 3);
+	Binsert(sample, 10);
+	Binsert(sample, 1);
+	Binsert(sample, 6);
+	Binsert(sample, 14);
+	Btraverse(sample, 'l');
 	printf("test passed\n");
 }

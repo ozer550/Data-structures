@@ -34,4 +34,10 @@ int BisEmpty(Bst tree);
 //Depth-first-search for bst
 Node Bdfs(Bst tree, int val);
 
+//Returns sum of all the elements of the tree
+int Bsum(Bst tree);
+
+//all types of traversals
+void Btraverse(Bst tree, char c);
+
 #endif
