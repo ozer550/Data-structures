@@ -23,8 +23,10 @@ int main()
 	//testBpreOrder();
 	//testBpostOrder();
 	//testBinOrder();
-	testBlevelorder();
-	printf("All test passed\n");
+	//testBlevelorder();
+    testBdeleteNode();
+ 	
+	printf("All tests passed\n");
 	return 0;
 }
 
@@ -134,3 +136,24 @@ void testBlevelorder()
 	Btraverse(sample, 'l');
 	printf("test passed\n");
 }
+
+void testBdeleteNode()
+{
+     printf("testing levelorderfxn function\n");
+	Bst sample = Bmaketree();
+	Binsert(sample, 8);
+	Binsert(sample, 3);
+	Binsert(sample, 10);
+	Binsert(sample, 1);
+	Binsert(sample, 6);
+	Binsert(sample, 14);
+	Binsert(sample, 9);
+
+	printf("test passed\n");
+    Btraverse(sample,'P'); 
+    printf("\n");
+    BdeleteNode(sample,10);
+
+    Btraverse(sample,'P'); 
+    
+} 

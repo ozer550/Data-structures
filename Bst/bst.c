@@ -37,7 +37,8 @@ static void BpreOrder(Node head);
 static void BpostOrder(Node head);
 static void BinOrder(Node head);
 static void BlevelOrder(Bst tree, Node head);
-
+static Node spcdfs(Node head, int val);
+static int BinOrdersuc(Node head);
 ////function to create a new node with item value
 //fxn is private to this ADT
 static Node newnode(int val)
@@ -276,6 +277,7 @@ static void BinOrder(Node head)
 	if (head != NULL)
 	{
 		printf("%d ", head->value);
+         
 	}
 	if (head->right != NULL)
 	{
@@ -305,4 +307,160 @@ static void BlevelOrder(Bst tree, Node head)
 			head = Bdfs(tree, queue_front(q));
 		}
 	}
+}
+
+//Delete a node GEEZ IM SACRED
+void BdeleteNode(Bst tree,int val)
+{
+    Node dlt =Bdfs(tree,val);
+    if(dlt==NULL)
+    {
+        printf("no such node found");
+        
+    }
+    //case-1 deleting leaf node
+    if(dlt->left == NULL && dlt->right==NULL)
+    {
+        Node prev = spcdfs(tree->head,val);
+        if(prev->left!=NULL)
+        {
+          if(prev->left->value == val)
+          {        
+              prev->left=NULL;
+              tree->size--; 
+              free(dlt);
+              return;
+          }
+        }
+        if(prev->right!=NULL)
+        {
+          if(prev->right->value== val)
+          {        
+               prev->right=NULL;
+               tree->size--; 
+               free(dlt);
+               return;
+           }
+        } 
+
+    }
+    //case-2 deleting node with one child
+    if((dlt->left==NULL && dlt->right!=NULL) || (dlt->right==NULL && dlt->left!=NULL)) 
+    {
+        Node prev = spcdfs(tree->head,val);
+        if(prev->left!=NULL)
+        {
+          if(prev->left->value == val)
+          {        
+             if((dlt->left==NULL && dlt->right!=NULL))
+             {
+               prev->left=dlt->right;
+               tree->size--;
+               free(dlt);
+               return;
+             }  
+             if((dlt->right==NULL && dlt->left!=NULL))
+             {
+               prev->left=dlt->left;
+               tree->size--;
+               free(dlt);
+               return;
+             }
+          }
+        }
+       if(prev->right!=NULL)
+        {
+          if(prev->right->value == val)
+          {        
+             if((dlt->left==NULL && dlt->right!=NULL))
+             {
+               prev->right=dlt->right;
+               tree->size--;
+               free(dlt);
+               return;
+             }  
+             if((dlt->right==NULL && dlt->left!=NULL))
+             {
+               prev->right=dlt->left;
+               tree->size--;
+               free(dlt);
+               return;
+             }
+          }
+        } 
+           
+    }
+    //Case-3 node with two childs
+    if( dlt->left!=NULL && dlt->right!=NULL )
+    {
+        int store=BinOrdersuc(dlt);
+        BdeleteNode(tree,store);
+        dlt->value=store;
+          
+         
+    }
+}
+
+
+//special fxn for de;eting node
+static Node spcdfs(Node head, int val)
+{
+
+	Node otptr = NULL;
+    if(head->left!=NULL)
+    {
+	  if (head->left->value == val )
+     	{
+
+		    otptr = head;
+	    	return otptr;
+     	}
+    }
+   if(head->right!=NULL)
+    {
+	  if (head->right->value == val )
+     	{
+
+		    otptr = head;
+	    	return otptr;
+     	}
+    } 
+	if (head->left != NULL)
+	{
+		if (val <= head->value)
+		{
+			otptr = spcdfs(head->left, val);
+			if (otptr != NULL)
+			{
+				return otptr;
+			}
+		}
+	}
+	if (head->right != NULL)
+	{
+		if (val > head->value)
+		{
+			otptr = spcdfs(head->right, val);
+			if (otptr != NULL)
+			{
+				return otptr;
+			}
+		}
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+//finds in-order succesor of right subtree of given node
+static int BinOrdersuc(Node head) 
+{
+    head=head->right;
+    assert(head!=NULL);
+    while(head->left!=NULL)
+    {
+        head=head->left;
+    }
+    return  head->value;
 }

@@ -40,4 +40,6 @@ int Bsum(Bst tree);
 //all types of traversals
 void Btraverse(Bst tree, char c);
 
+//Delete a node <finally>
+void BdeleteNode(Bst tree,int val);
 #endif
